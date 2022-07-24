@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Common</title>
+</head>
+<body>
+<section th:fragment="menu" class="sidebar">
+    <!-- Sidebar Menu -->
+    <ul class="sidebar-menu">
+        <li class="" th:classappend="${activeMenu eq 'home'} ? 'active':''"><a th:href="@{/}" href="#"><i class="fa fa-home"></i> <span>Home</span></a></li>
+
+		<li th:if="${session.role.equals('ROLE_ADMIN')}" class="header">Data</li>
+        <li th:if="${session.role.equals('ROLE_ADMIN')}" class="" th:classappend="${activeMenu eq 'admins/students'}? 'active':''"><a th:href="@{/admin/student}" href="#"><i class="fa fa-user-circle-o"></i> <span>Students</span></a></li>
+        <li th:if="${session.role.equals('ROLE_ADMIN')}" class="" th:classappend="${activeMenu eq 'admins/teachers'}? 'active':''"><a th:href="@{/admin/teacher}" href="#"><i class="fa fa-user-circle-o"></i> <span>Teacher</span></a></li>
+
+        <li th:if="${session.role.equals('ROLE_ADMIN') || session.role.equals('ROLE_STUDENT')}" class="header">Schedule</li>
+        <!-- <li th:if="${#authorization.expression('hasRole(''MARKETING'')')}" class="" th:classappend="${activeMenu eq 'banner'}? 'active':''"><a th:href="@{/banner}" href="#"><i class="fa fa-image"></i> <span>Testimonial Banner</span></a></li>
+         -->
+        <!-- <li th:if="${#authorization.expression('hasRole(''MARKETING'')')}" class="" th:classappend="${activeMenu eq 'love_letter'} ? 'active':''"><a th:href="@{/love-letter}" href="#"><i class="fa fa-heart"></i> <span>Love Letter</span></a></li> -->
+        
+<!--        <li th:if="" class="" th:classappend="${activeMenu eq 'testimonial'} ? 'active':''"><a th:href="@{/testimonial}" href="#"><i class="fa fa-comment"></i> <span>Testimonial</span></a></li>-->
+        
+        <!-- Notification  -->
+<!--        <li th:if="" class="header">Notification Center</li>-->
+<!--        <li th:if="" class="" th:classappend="${activeMenu eq 'notification'}? 'active':''"><a th:href="@{/notification/add}" href="#"><i class="fa fa-bell"></i> <span>Notification Gen IClick</span></a></li>-->
+<!--        <li th:if="" class="" th:classappend="${activeMenu eq 'notificationMConnect'}? 'active':''"><a th:href="@{/notificationMConnect/add}" href="#"><i class="fa fa-bell"></i> <span>Notification MConnect</span></a></li>-->
+
+    </ul>
+    <!-- /.sidebar-menu -->
+</section>
+</body>
+</html>

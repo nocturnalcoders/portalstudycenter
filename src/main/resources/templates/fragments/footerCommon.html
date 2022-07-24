@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Footer Common</title>
+</head>
+<body>
+    <div th:fragment="footer">
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- Default to the left -->
+            <strong>Copyright &copy; <span th:utext="${#dates.year(#dates.createNow())}"></span> <a href="http://www.studycenter.co.id/">Study Center</a>.</strong> All rights reserved.
+        </footer>
+
+        <!-- REQUIRED JS SCRIPTS -->
+
+        <!-- jQuery 2.2.3 -->
+        <script th:src="@{/assets/plugins/jQuery/jquery-2.2.3.min.js}" src="../../static/assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
+        <!-- Bootstrap 3.3.6 -->
+        <script th:src="@{/assets/bootstrap/js/bootstrap.min.js}" src="../../static/assets/bootstrap/js/bootstrap.min.js"></script>
+        <!-- Moment JS -->
+        <script th:src="@{/assets/js/moment.min.js}" src="../../static/assets/js/moment.min.js"></script>
+        <!-- AdminLTE App -->
+        <script th:src="@{/assets/js/app.js}" src="../../static/assets/js/app.js"></script>
+        <script th:src="@{/assets/js/jquery.validate.min.js}"></script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headerCommon :: head">
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+  <header th:replace="fragments/mainHeaderCommon::mainHeader" class="main-header">
+  </header>
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar" th:replace="fragments/menuCommon::menu">
+    </section>
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        <span th:utext="${pageTitle}" th:remove="tag"></span>
+        <small th:utext="${pageSubtitle}"></small>
+      </h1>
+
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <!-- Your Page Content Here -->
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-default">
+            <div class="box-body">
+              <div class="alert alert-success">
+                <h4><i class="icon fa fa-check"></i> Success!</h4>
+                <span th:utext="${messages}" th:remove="tag"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <div th:replace="fragments/footerCommon :: footer" th:remove="tag"></div>
+</div>
+
+</body>
+</html>

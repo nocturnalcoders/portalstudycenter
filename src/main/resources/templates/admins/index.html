@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headerCommon :: head">
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header th:replace="fragments/mainHeaderCommon::mainHeader" class="main-header">
+    </header>
+    <aside class="main-sidebar">
+        <section class="sidebar" th:replace="fragments/menuCommon::menu"></section>
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="alert alert-success" th:if="${status == 'success'}">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                <h4 class="text-success"><i class="fa fa-check-circle"></i> Success!</h4><span th:text="${message}"></span>
+            </div>
+
+            <div class="alert alert-danger" th:if="${status == 'failed'}">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                <h4 class="text-success"><i class="fa fa-times-circle"></i> Failed!</h4><span th:text="${message}"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="col-8 p-15">
+                                <h3 class="card-title" th:utext="${pageTitle}"></h3>
+                                <h5 class="card-subtitle"><a th:href="@{'/dashboard'}">Dashboard</a> /
+                                    <span th:utext="${pageTitle}"></span> /
+                                    <span th:utext="${pageSubTitle}"></span>
+                                </h5>
+
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body p-15">
+<!--                            <div class="nav-tabs-custom">-->
+<!--                                <ul class="nav nav-tabs">-->
+<!--                                    <li class="active"><a href="#CMS" data-toggle="tab" aria-expanded="true" onclick="openCity(event, 'CMS')">MARKETING</a></li>-->
+<!--                                    <li class=""><a href="#CUSTOMER" data-toggle="tab" aria-expanded="false" onclick="openCity(event, 'CUSTOMER')">CUSTOMER</a></li>-->
+<!--                                </ul>-->
+
+<!--                                <div class="tab-content">-->
+<!--                                    <div class="tab-pane active" id="CMS">-->
+<!--                                        <a th:href="@{/testimonial/add}" class="btn btn-success mb-15"><span class="fa fa-plus"></span> Add Testimonial</a>-->
+<!--                                        <table id="testimoniTable" class="table table-bordered table-striped nowrap">-->
+<!--                                            <thead>-->
+<!--                                            </thead>-->
+<!--                                        </table>-->
+<!--                                    </div>-->
+
+<!--                                    <div class="tab-pane" id="CUSTOMER">-->
+<!--                                        <table id="testimoniTableCustomer" class="table table-bordered table-striped nowrap">-->
+<!--                                            <thead>-->
+<!--                                            </thead>-->
+<!--                                        </table>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <div th:replace="fragments/footerCommon::footer" th:remove="tag"></div>
+</div>
+
+<!-- DataTables -->
+<script th:src="@{/assets/plugins/datatables/jquery.dataTables.min.js}" src="../../static/plugins/datatables/jquery.dataTables.min.js"></script>
+<script th:src="@{/assets/plugins/datatables/dataTables.bootstrap.min.js}" src="../../static/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script th:src="@{/assets/js/clipboard/clipboard.min.js}" src="../../static/assets/js/clipboard/clipboard.min.js"></script>
+<script th:src="@{/assets/plugins/slimScroll/jquery.slimscroll.min.js}" src="../../static/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script th:src="@{/assets/plugins/fastclick/fastclick.js}" src="../../static/plugins/fastclick/fastclick.js"></script>
+</body>
+</html>

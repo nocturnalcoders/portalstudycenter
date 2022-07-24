@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headerLogin :: head">
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        <strong>Study Center Portal Login</strong>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+
+        <form name="f" id="frmLogin" th:action="@{/login}" method="post" th:object="${credentials}">
+            <p class="alert alert-error"
+               th:if="${#fields.hasGlobalErrors()}"
+               th:each="error : ${#fields.errors('global')}"
+               th:text="${error}">Validation error</p>
+
+            <div th:if="${param.logout}">
+                <div class="alert alert-warning">
+                    You have been logged out.
+                </div>
+            </div>
+            <div class="form-group has-feedback" th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
+                <input type="text"
+                       id="email"
+                       name="email"
+                       class="form-control"
+                       th:field="*{email}"
+                       autofocus="autofocus"
+                       placeholder="E-mail"/>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback" th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
+                <input type="password"
+                       id="password"
+                       name="password"
+                       class="form-control"
+                       th:field="*{password}"
+                       placeholder="Password"/>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group">
+                <label for="role">Log in as</label>
+                <select id="role" class="form-control" th:field="*{role}">
+                    <option selected="selected" value="ROLE_STUDENT">Student</option>
+                    <option value="ROLE_TEACHER">Teacher</option>
+                    <option value="ROLE_ADMIN">Administrator</option>
+                </select>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-danger btn-block btn-flat">Sign In</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:replace="fragments/footerLogin :: footer"></div>
+</body>
+<script th:inline="javascript">
+    /* window.onload = function () {
+        document.forms["f"].submit();
+    } */
+</script>
+</html>
