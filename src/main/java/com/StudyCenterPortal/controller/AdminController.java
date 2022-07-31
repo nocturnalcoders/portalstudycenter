@@ -2,6 +2,8 @@ package com.StudyCenterPortal.controller;
 
 import com.StudyCenterPortal.dto.UserDto;
 import com.StudyCenterPortal.model.User;
+import com.StudyCenterPortal.service.StudentService;
+import com.StudyCenterPortal.service.TeacherService;
 import com.StudyCenterPortal.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AdminController {
     private final UserService service;
+    private final StudentService studentService;
+    private final TeacherService teacherService;
     private final ModelMapper modelMapper;
 
     @Autowired
@@ -70,9 +73,11 @@ public class AdminController {
         model.addAttribute("activeMenu", MENU);
         model.addAttribute("pageTitle", TITLE);
         model.addAttribute("pageSubTitle", "List " + TITLE);
+        model.addAttribute("firstName", service.getCurrentUser().getFirstName());
         //============================================
 //        model.addAttribute("listStudents", );
 
+        model.addAttribute("listStudents", studentService.findByAllStudentRole());
         return FOLDER_NAME_STUDENT + "index";
     }
 
@@ -89,7 +94,7 @@ public class AdminController {
         model.addAttribute("activeMenu", MENU);
         model.addAttribute("pageTitle", TITLE);
         model.addAttribute("pageSubTitle", "List " + TITLE);
-
+        model.addAttribute("firstName", service.getCurrentUser().getFirstName());
         return FOLDER_NAME_STUDENT + "create";
     }
 
@@ -108,9 +113,10 @@ public class AdminController {
         model.addAttribute("activeMenu", MENU);
         model.addAttribute("pageTitle", TITLE);
         model.addAttribute("pageSubTitle", "List " + TITLE);
+        model.addAttribute("firstName", service.getCurrentUser().getFirstName());
         //============================================
 //        model.addAttribute("listStudents", );
-
+        model.addAttribute("listTeachers", teacherService.findByAllTeacherRole());
         return FOLDER_NAME_TEACHER + "index";
     }
 
@@ -127,6 +133,8 @@ public class AdminController {
         model.addAttribute("activeMenu", MENU);
         model.addAttribute("pageTitle", TITLE);
         model.addAttribute("pageSubTitle", "List " + TITLE);
+        model.addAttribute("firstName", service.getCurrentUser().getFirstName());
+        //==================================================================================
 
         return FOLDER_NAME_TEACHER + "create";
     }

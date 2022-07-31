@@ -45,6 +45,37 @@
                         </div>
                         <!-- /.box-body -->
                     </div>
+                    <div class="box">
+                        <div class="box-body">
+                            <table id="paginatedTable" class="table table-bordered table-striped">
+
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <!--                                        <th>Address</th>-->
+                                    <th>Email</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="list: ${listTeachers}">
+                                    <td th:text="${list.id}" />
+                                    <td th:text="${list.firstName}" />
+                                    <td th:text="${list.lastName}" />
+                                    <td th:text="${list.email}" />
+                                    <td>
+                                        <a th:href="@{/showUpdateForm(employeeId=${list.id})}" class="btn btn-info">Update</a>
+
+                                        <a th:href="@{/deleteEmployee(employeeId=${list.id})}" class="btn btn-danger ml-2">Delete</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                     <!-- /.box -->
                 </div>
                 <!-- /.col -->
@@ -65,3 +96,14 @@
 <script th:src="@{/assets/plugins/fastclick/fastclick.js}" src="../../static/plugins/fastclick/fastclick.js"></script>
 </body>
 </html>
+
+<script>
+    $(document).ready(function() {
+        $("#paginatedTable").DataTable({
+            'aoColumnDefs': [{
+                'bSortable': false,
+                'aTargets': [-1] /* 1st one, start by the right */
+            }]
+        });
+    })
+</script>
