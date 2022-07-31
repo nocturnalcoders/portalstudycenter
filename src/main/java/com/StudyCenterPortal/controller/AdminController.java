@@ -39,7 +39,8 @@ public class AdminController {
     private String FOLDER_NAME_TEACHER = "admins/teachers/";
 
 
-    private String TITLE = "Students Management";
+    private String TITLE_STUDENTS = "Students Management";
+    private String TITLE_TEACHERS = "Teachers Management";
 
     @ModelAttribute("users")
     public List<UserDto> usersAttribute() {
@@ -71,8 +72,8 @@ public class AdminController {
             model.addAttribute("holder", new User());
         }
         model.addAttribute("activeMenu", MENU);
-        model.addAttribute("pageTitle", TITLE);
-        model.addAttribute("pageSubTitle", "List " + TITLE);
+        model.addAttribute("pageTitle", TITLE_STUDENTS);
+        model.addAttribute("pageSubTitle", "List " + TITLE_STUDENTS);
         model.addAttribute("firstName", service.getCurrentUser().getFirstName());
         //============================================
 //        model.addAttribute("listStudents", );
@@ -92,8 +93,8 @@ public class AdminController {
         logger.info("/students");
 
         model.addAttribute("activeMenu", MENU);
-        model.addAttribute("pageTitle", TITLE);
-        model.addAttribute("pageSubTitle", "List " + TITLE);
+        model.addAttribute("pageTitle", TITLE_STUDENTS);
+        model.addAttribute("pageSubTitle", "List " + TITLE_STUDENTS);
         model.addAttribute("firstName", service.getCurrentUser().getFirstName());
         return FOLDER_NAME_STUDENT + "create";
     }
@@ -111,8 +112,8 @@ public class AdminController {
             model.addAttribute("holder", new User());
         }
         model.addAttribute("activeMenu", MENU);
-        model.addAttribute("pageTitle", TITLE);
-        model.addAttribute("pageSubTitle", "List " + TITLE);
+        model.addAttribute("pageTitle", TITLE_TEACHERS);
+        model.addAttribute("pageSubTitle", "List " + TITLE_TEACHERS);
         model.addAttribute("firstName", service.getCurrentUser().getFirstName());
         //============================================
 //        model.addAttribute("listStudents", );
@@ -131,8 +132,8 @@ public class AdminController {
         logger.info("/students");
 
         model.addAttribute("activeMenu", MENU);
-        model.addAttribute("pageTitle", TITLE);
-        model.addAttribute("pageSubTitle", "List " + TITLE);
+        model.addAttribute("pageTitle", TITLE_TEACHERS);
+        model.addAttribute("pageSubTitle", "List " + TITLE_TEACHERS);
         model.addAttribute("firstName", service.getCurrentUser().getFirstName());
         //==================================================================================
 
