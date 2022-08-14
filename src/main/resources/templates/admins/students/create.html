@@ -7,7 +7,7 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+  <div class="wrapper">
   <header th:replace="fragments/mainHeaderCommon::mainHeader" class="main-header">
   </header>
   <aside class="main-sidebar">
@@ -30,8 +30,11 @@
               </div>
             </div>
           </div>
-          <form th:action="@{/notificationMConnect/add}" method="POST" th:object="${holder}"
-                enctype="multipart/form-data" id="notificationForm" role="form">
+          <form th:action="@{/admin/student/add}" method="POST" th:object="${holder}" role="form">
+            <p class="alert alert-error"
+               th:if="${#fields.hasGlobalErrors()}"
+               th:each="error : ${#fields.errors('global')}"
+               th:text="${error}">Validation error</p>
             <div class="row">
               <div class="col-md-8">
                 <div class="box">
@@ -43,27 +46,78 @@
                     </div>
                     <div class="box-body">
                       <div class="col-md-12">
+                        <div class="form-group has-feedback col-md-12" th:classappend="${#fields.hasErrors('firstName')}? 'has-error':''">
+                          <input type="text"
+                                 id="firstName"
+                                 name="firstname"
+                                 class="form-control"
+                                 th:field="*{firstName}"
+                                 autofocus="autofocus"
+                                 placeholder="First Name"/>
+                          <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback col-md-12" th:classappend="${#fields.hasErrors('lastName')}? 'has-error':''">
+                          <input type="text"
+                                 id="lastName"
+                                 name="lastname"
+                                 class="form-control"
+                                 th:field="*{lastName}"
+                                 autofocus="autofocus"
+                                 placeholder="Last Name"/>
+                          <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        </div>
+
+                        <div class="form-group has-feedback col-md-12" th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
+                          <input type="email"
+                                 id="email"
+                                 name="email"
+                                 class="form-control"
+                                 th:field="*{email}"
+                                 autofocus="autofocus"
+                                 placeholder="E-mail"/>
+                          <span class="glyphicon glyphicon-inbox form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback col-md-12" th:classappend="${#fields.hasErrors('confirmEmail')}? 'has-error':''">
+                          <input type="email"
+                                 id="confirmEmail"
+                                 name="confirmEmail"
+                                 class="form-control"
+                                 th:field="*{confirmEmail}"
+                                 autofocus="autofocus"
+                                 placeholder="Confirm E-mail"/>
+                          <span class="glyphicon glyphicon-inbox form-control-feedback"></span>
+                        </div>
+
+                        <div class="form-group has-feedback col-md-12" th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
+                          <input type="password"
+                                 id="password"
+                                 name="password"
+                                 class="form-control"
+                                 th:field="*{password}"
+                                 placeholder="Password"/>
+                          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback col-md-12" th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
+                          <input type="password"
+                                 id="confirmPassword"
+                                 name="confirmPassword"
+                                 class="form-control"
+                                 th:field="*{confirmPassword}"
+                                 placeholder="Confirm Password"/>
+                          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
                         <div class="form-group col-md-12">
-                          <div class="form-group">
-                            <label class="form-label">Title
-                              Notification</label>
-                            <input type="text" class="form-control tit" id="titleParam"
-                                   name="titleParam" placeholder="Input your title" required maxlength="65">
-                            <p class="character-counts"></p>
-                          </div>
-                          <div class="form-group">
-                            <label class="form-label">Message Notification</label>
-                            <textarea class="form-control mes" id="param" name="param"
-                                      placeholder="Input your Message"
-                                      rows="3" required maxlength="113"> </textarea>
-                            <p class="character-count"></p>
+                          <label class="form-label">Address</label>
+                          <textarea class="form-control address" id="address" name="address"
+                                    placeholder="Student Address"
+                                    rows="3" required maxlength="113"> </textarea>
+                          <p class="character-count"></p>
+                        </div>
+                        <div class="box-footer">
+                          <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="box-footer col-md-12">
-                      <button id="btnSubmit" type="submit" onClick="refreshPage()"
-                              class="btn btn-primary" data-toggle="modal" data-target="#myModal" >Submit</button>
                     </div>
                   </div>
                   <!-- /.col -->
@@ -83,180 +137,6 @@
   <!-- /.content-wrapper -->
   <div th:replace="fragments/footerCommon::footer" th:remove="tag"></div>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Data ready to create</h4>
-      </div>
-      <div class="modal-body">
-        <p>Wait Until Loading is Finished</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-<!-- Datatables -->
-<script th:src="@{/assets/plugins/datatables/jquery.dataTables.min.js}"
-        src="../../static/plugins/datatables/jquery.dataTables.min.js"></script>
-<script th:src="@{/assets/plugins/datatables/dataTables.bootstrap.min.js}"
-        src="../../static/plugins/datatables/dataTables.bootstrap.min.js"></script>
-<script th:src="@{/assets/js/clipboard/clipboard.min.js}"
-        src="../../static/assets/js/clipboard/clipboard.min.js"></script>
-<script th:src="@{/assets/plugins/slimScroll/jquery.slimscroll.min.js}"
-        src="../../static/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<script th:src="@{/assets/plugins/fastclick/fastclick.js}"
-        src="../../static/plugins/fastclick/fastclick.js"></script>
-<script th:inline="javascript">
-  for (var i = 0; i < document.getElementsByClassName("form-control mes").length; i++) {
-    document.getElementsByClassName("form-control mes")[i].onkeyup = function (i) {
-      return function () {
-        console.log(this);
-        var text_max = 113;
-        var text_length = this.value.length;
-        var text_remaining = text_max - text_length;
-        document.getElementsByClassName("character-count")[i].innerHTML = "Character count:" + text_length + "/" + text_max;
-      };
-    }(i);
-  }
-
-  for (var i = 0; i < document.getElementsByClassName("form-control tit").length; i++) {
-    document.getElementsByClassName("form-control tit")[i].onkeyup = function (i) {
-      return function () {
-        console.log(this);
-        var text_max = 65;
-        var text_length = this.value.length;
-        var text_remaining = text_max - text_length;
-        document.getElementsByClassName("character-counts")[i].innerHTML = "Character count:" + text_length + "/" + text_max;
-      };
-    }(i);
-  }
-
-
-  $(document).ready(function() {
-    $('.btn-primary').attr('disabled', true);
-    if ($('#titleParam').on('keyup', function () {
-      if ($('#param').on('keyup', function () {
-        if ($('#titleParam').val().length != 0 && $('#param').val().length != 0) {
-          $('.btn-primary').attr('disabled', false);
-        } else {
-          $('.btn-primary').attr('disabled', true);
-        }
-      }));
-    }));
-  });
-
-  $(document).ready(function () {
-
-    $('#nasabahType').change(() => {
-      const data = {
-        id: 0,
-        filterName: "",
-        flagActive: 1,
-        filterDescription: "",
-        value1: "",
-        value2: "",
-        orderNo: 1,
-        filterType: "",
-        policyType: $('#nasabahType').val()
-      }
-      if($('#nasabahType').val() == "All" ||$('#nasabahType').val() == " ") {
-        $('#filterName, #filterValue').prop('disabled', true);
-        $('#filterValue').prop('selectedIndex',0);
-      } else {
-        $('#filterName, #filterValue').prop('disabled', false);
-        $('#filterValue').prop('selectedIndex',0);
-      }
-
-      $.ajax({
-        type: 'POST',
-        url: 'https://uat-marcomm-cms-ws.generali.co.id/parameter/search',
-        data: JSON.stringify(data),
-        dataType: "json",
-        contentType: "application/json",
-        success: (res) => {
-          let html;
-          html += "<option value=''>"+"--SELECT--"+"</option>"
-          res.data.forEach(el => {
-            html += "<option value='" + el.filterName + "'>" + el.filterName + "</option>"
-          })
-          console.log(res)
-          $('#filterName').html(html);
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      })
-    })
-    $('#filterName').change(() => {
-      const data = {
-        id: 0,
-        filterName: $('#filterName').val(),
-        flagActive: 1,
-        filterDescription: "",
-        value1: "",
-        value2: "",
-        orderNo: 0,
-        paramDesc: "",
-        filterType: "",
-        policyType: $('#nasabahType').val()
-      }
-
-      $.ajax({
-        type: 'POST',
-        url: 'https://uat-marcomm-cms-ws.generali.co.id/parameter/search',
-        data: JSON.stringify(data),
-        dataType: "json",
-        contentType: "application/json",
-        success: (res) => {
-          let html;
-          html += "<option value=' '>"+"--SELECT--"+"</option>"
-          res.data.forEach(el => {
-            html += "<option value='" + el.value1 + "'>" + el.filterDescription + "</option>"
-          })
-          console.log(res)
-          $('#filterValue').html(html);
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      })
-    })
-    $('#filterValue').change(() => {
-      const data = {
-        id: 0,
-        filterName: $('#filterName').val(),
-        flagActive: 1,
-        filterDescription: "",
-        value1: $('#filterValue').val(),
-        value2: "",
-        orderNo: 0,
-        paramDesc: "",
-        filterType: "",
-        policyType: $('#nasabahType').val()
-      }
-
-      $.ajax({
-        type: 'POST',
-        url: 'https://uat-marcomm-cms-ws.generali.co.id/parameter/search',
-        data: JSON.stringify(data),
-        dataType: "json",
-        contentType: "application/json",
-        error: (err) => {
-          console.log(err)
-        }
-      })
-    })
-  });
-</script>
 </body>
 
 </html>

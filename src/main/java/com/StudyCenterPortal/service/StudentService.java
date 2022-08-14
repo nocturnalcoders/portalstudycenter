@@ -19,4 +19,5 @@ public class StudentService {
     public List<User> findByAllStudentRole() {
         return userRepository.findByAllStudentRole();
     }
+
 }

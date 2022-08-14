@@ -59,6 +59,7 @@ public class UserService implements IUserService {
         user.setFirstName(registration.getFirstName());
         user.setLastName(registration.getLastName());
         user.setEmail(registration.getEmail());
+        user.setAddress(registration.getAddress());
         user.setPassword(passwordEncoder.encode(registration.getPassword()));
         user.setRoles(Collections.singletonList(roleRepository.findByName("ROLE_STUDENT")));
 
