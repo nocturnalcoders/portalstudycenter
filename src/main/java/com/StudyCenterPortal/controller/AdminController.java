@@ -148,7 +148,9 @@ public class AdminController {
             model.addAttribute("org.springframework.validation.BindingResult.holder",
                     model.asMap().get("formBindingResult"));
         }
-        logger.info("/students");
+        if (!model.containsAttribute("holder")) {
+            model.addAttribute("holder", new UserRegistrationDto());
+        }
 
         model.addAttribute("activeMenu", MENU);
         model.addAttribute("pageTitle", TITLE_TEACHERS);
@@ -158,4 +160,23 @@ public class AdminController {
 
         return FOLDER_NAME_TEACHER + "create";
     }
+
+    @PostMapping(path = "/teacher/add")
+    @PreAuthorize(("@securityService.hasPrivilege('CREATE_USERS')"))
+    public String PostaddTeachers(@Valid @ModelAttribute("holder") UserRegistrationDto userDto, BindingResult result) {
+        logger.info("/teacher/add");
+        User existing = userService.findByEmail(userDto.getEmail());
+        if (existing != null){
+            result.rejectValue("email", "There is already an account registered with that email");
+        }
+        if (result.hasErrors()){
+            logger.info("error");
+            return "teacher/add";
+        }
+
+        userService.save_teacher(userDto);
+
+        return FOLDER_NAME_TEACHER + "create";
+    }
+
 }

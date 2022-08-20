@@ -54,7 +54,6 @@
                                  th:field="*{firstName}"
                                  autofocus="autofocus"
                                  placeholder="First Name"/>
-                          <span class="glyphicon glyphicon-user form-control-feedback"></span>
                         </div>
                         <div class="form-group has-feedback col-md-12" th:classappend="${#fields.hasErrors('lastName')}? 'has-error':''">
                           <input type="text"
@@ -64,9 +63,7 @@
                                  th:field="*{lastName}"
                                  autofocus="autofocus"
                                  placeholder="Last Name"/>
-                          <span class="glyphicon glyphicon-user form-control-feedback"></span>
                         </div>
-
                         <div class="form-group has-feedback col-md-12" th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
                           <input type="email"
                                  id="email"
@@ -75,7 +72,6 @@
                                  th:field="*{email}"
                                  autofocus="autofocus"
                                  placeholder="E-mail"/>
-                          <span class="glyphicon glyphicon-inbox form-control-feedback"></span>
                         </div>
                         <div class="form-group has-feedback col-md-12" th:classappend="${#fields.hasErrors('confirmEmail')}? 'has-error':''">
                           <input type="email"
@@ -85,9 +81,7 @@
                                  th:field="*{confirmEmail}"
                                  autofocus="autofocus"
                                  placeholder="Confirm E-mail"/>
-                          <span class="glyphicon glyphicon-inbox form-control-feedback"></span>
                         </div>
-
                         <div class="form-group has-feedback col-md-12" th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
                           <input type="password"
                                  id="password"
@@ -95,7 +89,6 @@
                                  class="form-control"
                                  th:field="*{password}"
                                  placeholder="Password"/>
-                          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                         </div>
                         <div class="form-group has-feedback col-md-12" th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
                           <input type="password"
@@ -104,8 +97,7 @@
                                  class="form-control"
                                  th:field="*{confirmPassword}"
                                  placeholder="Confirm Password"/>
-                          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                        </div>
+                          </div>
                         <div class="form-group col-md-12">
                           <label class="form-label">Address</label>
                           <textarea class="form-control address" id="address" name="address"
